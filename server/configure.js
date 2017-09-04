@@ -4,22 +4,24 @@
  * required modules
  */
 var path = require('path'),
-    routes = require('routes'),
+    routes = require('./routes'),
     exhbs = require('express-handlebars'),
     express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     morgan = require('morgan'),
-    methodOverride = require('mehod-override'),
+    methodOverride = require('method-override'),
     errorHandler = require('errorhandler');
 
 /**
  * export module configure
  */
 module.exports = function (app) {
+    // console.log(routes);
     app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({
-        'extended': true
+        // 'extended': true,
+        'uploadDir': path.join(__dirname, 'public/upload/temp')
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
