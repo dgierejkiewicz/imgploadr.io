@@ -17,7 +17,7 @@ var path = require('path'),
  * export module configure
  */
 module.exports = function (app) {
-    // console.log(routes);
+
     app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({
         // 'extended': true,
@@ -32,6 +32,14 @@ module.exports = function (app) {
     if ('development' === app.get('env')) {
         app.use(errorHandler);
     }
+
+    app.engine('hbs', exhbs.create({
+        defaultLayout: 'main',
+        layoutsDir: app.get('views') + '/layouts',
+        partialsDir: [app.get('views') + '/partials'],
+    }).engine);
+
+    app.set('view engine', 'hbs');
 
     return app;
 
