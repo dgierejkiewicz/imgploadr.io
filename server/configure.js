@@ -20,7 +20,7 @@ module.exports = function (app) {
 
     app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({
-        // 'extended': true,
+        'extended': true,
         'uploadDir': path.join(__dirname, 'public/upload/temp')
     }));
     app.use(bodyParser.json());
