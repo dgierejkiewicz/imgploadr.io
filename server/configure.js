@@ -33,13 +33,16 @@ module.exports = function (app) {
         app.use(errorHandler);
     }
 
-    app.engine('hbs', exhbs.create({
+    // path to views
+    var viewPath = path.join(__dirname, '../views');
+    app.set('views', viewPath);
+    app.engine('handlebars', exhbs.create({
         defaultLayout: 'main',
         layoutsDir: app.get('views') + '/layouts',
         partialsDir: [app.get('views') + '/partials'],
     }).engine);
 
-    app.set('view engine', 'hbs');
+    app.set('view engine', 'handlebars');
 
     return app;
 
