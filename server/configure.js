@@ -11,7 +11,8 @@ var path = require('path'),
     cookieParser = require('cookie-parser'),
     morgan = require('morgan'),
     methodOverride = require('method-override'),
-    errorHandler = require('errorhandler');
+    errorHandler = require('errorhandler'),
+    moment = require('moment');
 
 /**
  * export module configure
@@ -40,6 +41,11 @@ module.exports = function (app) {
         defaultLayout: 'main',
         layoutsDir: app.get('views') + '/layouts',
         partialsDir: [app.get('views') + '/partials'],
+        helpers: {
+            timeago: function (timestamp) {
+                return moment(timestamp).startOf('minute').fromNow();
+            }
+        }
     }).engine);
 
     app.set('view engine', 'handlebars');
